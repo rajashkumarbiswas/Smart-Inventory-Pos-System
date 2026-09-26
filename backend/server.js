@@ -1,16 +1,19 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
+const path = require('path');
 const cors = require('cors');
 
-dotenv.config();
+// backend ফোল্ডারের ভেতর থেকেই .env ফাইলটি সঠিকভাবে লোড করার কনফিগারেশন
+dotenv.config({ path: path.join(__dirname, '.env') });
+
 const app = express();
 
 app.use(express.json());
 app.use(cors());
 
-// সরাসরি ক্লাউড ডাটাবেজ কানেকশন স্ট্রিং
-const MONGO_URI = process.env.MONGO_URI || "mongodb+srv://admin_user:pos12345@cluster0.z1k2l.mongodb.net/smart_pos?retryWrites=true&w=majority";
+// পরিবেশ ভেরিয়েবল থেকে ডাটাবেজ কানেকশন স্ট্রিং লোড করা
+const MONGO_URI = process.env.MONGO_URI;
 
 mongoose.connect(MONGO_URI)
   .then(() => console.log('✅ MongoDB Connected Successfully!'))
