@@ -12,6 +12,14 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
+// --- Auth Routes যুক্ত করা হলো ---
+const authRoutes = require('./routes/authRoutes');
+app.use('/api/auth', authRoutes);
+
+// --- Product Routes যুক্ত করা হলো ---
+const productRoutes = require('./routes/productRoutes');
+app.use('/api/products', productRoutes);
+
 // পরিবেশ ভেরিয়েবল থেকে ডাটাবেজ কানেকশন স্ট্রিং লোড করা
 const MONGO_URI = process.env.MONGO_URI;
 
