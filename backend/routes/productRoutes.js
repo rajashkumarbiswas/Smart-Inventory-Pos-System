@@ -1,5 +1,10 @@
 const express = require('express');
-const { createProduct, getProducts } = require('../controllers/productController');
+const { 
+    createProduct, 
+    getProducts, 
+    updateProduct, 
+    deleteProduct 
+} = require('../controllers/productController');
 const { protect, authorizeRoles } = require('../middleware/authMiddleware');
 
 const router = express.Router();
@@ -13,5 +18,15 @@ router.post('/', protect, authorizeRoles('admin'), createProduct);
 // @desc    Get all products
 // @access  Private
 router.get('/', protect, getProducts);
+
+// @route   PUT /api/products/:id
+// @desc    Update a product
+// @access  Private (Admin only)
+router.put('/:id', protect, authorizeRoles('admin'), updateProduct);
+
+// @route   DELETE /api/products/:id
+// @desc    Delete a product
+// @access  Private (Admin only)
+router.delete('/:id', protect, authorizeRoles('admin'), deleteProduct);
 
 module.exports = router;

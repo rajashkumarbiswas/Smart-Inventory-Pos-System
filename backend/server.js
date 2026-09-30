@@ -20,6 +20,14 @@ app.use('/api/auth', authRoutes);
 const productRoutes = require('./routes/productRoutes');
 app.use('/api/products', productRoutes);
 
+// --- Sales Routes যুক্ত করা হলো ---
+const saleRoutes = require('./routes/saleRoutes');
+app.use('/api/sales', saleRoutes);
+
+// --- Dashboard Routes যুক্ত করা হলো ---
+const dashboardRoutes = require('./routes/dashboardRoutes');
+app.use('/api/dashboard', dashboardRoutes);
+
 // পরিবেশ ভেরিয়েবল থেকে ডাটাবেজ কানেকশন স্ট্রিং লোড করা
 const MONGO_URI = process.env.MONGO_URI;
 
